@@ -1,7 +1,8 @@
 from django import forms
 from django.contrib.auth.models import Group, User
+from django import forms
 from django.db import models
-from django.db.models import CharField, DateField, ForeignKey, Model
+from django.db.models import CharField, DateField, BooleanField, ForeignKey, Model
 from django.http import HttpResponseRedirect
 from modelcluster.contrib.taggit import ClusterTaggableManager
 from modelcluster.fields import ParentalKey, ParentalManyToManyField
@@ -16,12 +17,14 @@ from myhpi.wagtail_markdown.fields import MarkdownField
 class InformationPage(Page):
     body = MarkdownField()
     visible_for = ParentalManyToManyField(Group, related_name="visible_informationpages")
+    is_public = BooleanField()
 
     content_panels = Page.content_panels + [
         MarkdownPanel("body", classname="full"),
     ]
     settings_panels = [
         PublishingPanel(),
+        FieldPanel("is_public", widget=forms.CheckboxInput),
         FieldPanel("visible_for", widget=forms.CheckboxSelectMultiple),
     ]
     parent_page_types = [
@@ -35,12 +38,14 @@ class InformationPage(Page):
 class MinutesList(Page):
     group = ForeignKey(Group, on_delete=models.PROTECT)
     visible_for = ParentalManyToManyField(Group, related_name="visible_minuteslist")
+    is_public = BooleanField()
 
     content_panels = Page.content_panels + [
         FieldPanel("group", widget=forms.CheckboxSelectMultiple),
     ]
     settings_panels = [
         PublishingPanel(),
+        FieldPanel("is_public", widget=forms.CheckboxInput),
         FieldPanel("visible_for", widget=forms.CheckboxSelectMultiple),
     ]
     parent_page_types = [
@@ -82,6 +87,7 @@ class Minutes(Page):
     author = ForeignKey(User, on_delete=models.CASCADE, related_name="author")
     participants = ParentalManyToManyField(User, related_name="minutes")
     labels = ClusterTaggableManager(through=TaggedMinutes, blank=True)
+    is_public = BooleanField()
     visible_for = ParentalManyToManyField(Group, related_name="visible_minutes")
     text = MarkdownField()
 
@@ -96,6 +102,7 @@ class Minutes(Page):
     ]
     settings_panels = [
         PublishingPanel(),
+        FieldPanel("is_public", widget=forms.CheckboxInput),
         FieldPanel("visible_for", widget=forms.CheckboxSelectMultiple),
     ]
     parent_page_types = ["MinutesList"]
