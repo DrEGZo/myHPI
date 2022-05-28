@@ -15,7 +15,7 @@ def get(dict, key):
 
 @register.filter
 def sub_menu_pages(page):
-    return page.get_children().in_menu()
+    return page.menu_children
 
 
 @register.filter
