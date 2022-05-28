@@ -1,0 +1,141 @@
+// 1. Include functions first (so you can manipulate colors, SVGs, calc, etc)
+@import "./bootstrap/functions";
+
+// 2. Include any default variable overrides here
+$primary: #F5631E;
+$secondary: #F5631E;
+$body-bg: #F5F5F5;
+
+// 3. Include remainder of required Bootstrap stylesheets
+@import "./bootstrap/variables";
+@import "./bootstrap/mixins";
+
+$custom-colors: (
+    "gray-700": $gray-700,
+    "text-muted": $text-muted,
+    "border": #EEE,
+    "border-dark": #B2B2B2,
+    "body-bg-light": #FBFBFB,
+    "body-bg-overlay": #EEE
+);
+$colors: map-merge($colors, $custom-colors);
+
+@import "./bootstrap/root";
+
+// 4. Include any optional Bootstrap CSS as needed
+@import "./bootstrap/utilities";
+@import "./bootstrap/reboot";
+@import "./bootstrap/type";
+@import "./bootstrap/images";
+@import "./bootstrap/containers";
+@import "./bootstrap/grid";
+
+@import "./bootstrap/tables";
+@import "./bootstrap/forms";
+@import "./bootstrap/buttons";
+@import "./bootstrap/transitions";
+@import "./bootstrap/dropdown";
+@import "./bootstrap/button-group";
+@import "./bootstrap/nav";
+@import "./bootstrap/navbar";
+@import "./bootstrap/card";
+@import "./bootstrap/accordion";
+@import "./bootstrap/breadcrumb";
+@import "./bootstrap/pagination";
+@import "./bootstrap/badge";
+@import "./bootstrap/alert";
+@import "./bootstrap/progress";
+@import "./bootstrap/list-group";
+@import "./bootstrap/close";
+@import "./bootstrap/toasts";
+@import "./bootstrap/modal";
+@import "./bootstrap/tooltip";
+@import "./bootstrap/popover";
+@import "./bootstrap/carousel";
+@import "./bootstrap/spinners";
+@import "./bootstrap/offcanvas";
+
+@import "./bootstrap/helpers";
+
+// 5. Optionally include utilities API last to generate classes based on the Sass map in `_utilities.scss`
+@import "./bootstrap/utilities/api";
+
+// 6. Add additional custom code here
+
+:root {
+    --bs-p-2: 0.5rem;
+    --myhpi-round-border: 2px;
+}
+
+.nav-item-container-root {
+    .nav-link {
+        margin-bottom: -3px;
+    }
+
+    .nav-link::after {
+        height: 3px;
+        width: 100%;
+        transform: scaleX(0);
+    }
+
+    .nav-link:hover:after,
+    .nav-link:focus-visible:after,
+    .nav-link[aria-expanded=true]:after {
+        transform: scaleX(1);
+    }
+}
+
+.nav-item-container:not(.nav-item-container-root) {
+    padding-right: var(--bs-p-2);
+    row-gap: 1px;
+
+    .nav-link {
+        transition: all 0.25s;
+        border-radius: var(--myhpi-round-border);
+        border: solid 2px var(--bs-body-bg-light);
+    }
+
+    .nav-link:hover,
+    .nav-link:focus-visible {
+        border-color: var(--bs-body-bg-overlay);
+        background-color: var(--bs-body-bg-overlay);
+    }
+
+    .nav-link[aria-expanded=true] {
+        border-color: var(--bs-border-dark);
+        background-color: var(--bs-body-bg-overlay);
+    }
+
+    .nav-item:first-child {
+        padding-top: var(--bs-p-2);
+    }
+
+    .nav-item:last-child {
+        padding-bottom: var(--bs-p-2);
+    }
+
+    .nav-item.dropdown .nav-link {
+        display: flex;
+    }
+
+    .nav-item.dropdown {
+        .nav-link * {
+            transition: all 0.25s;
+            flex-grow: 0;
+        }
+
+        .nav-link:hover .nav-link-title,
+        .nav-link:focus-visible .nav-link-title,
+        .nav-link[aria-expanded=true] .nav-link-title {
+            flex-grow: 1;
+        }
+
+        .nav-link .nav-link-icon {
+            width: 1rem;
+        }
+
+        .nav-link[aria-expanded=true] .nav-link-icon {
+            transform: rotateZ(180deg);
+        }
+    }
+}

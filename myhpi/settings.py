@@ -30,33 +30,35 @@ if not DEBUG:
 # Application definition
 
 INSTALLED_APPS = [
-    "myhpi.core",
-    "myhpi.polls",
-    "myhpi.search",
-    "wagtail.contrib.forms",
-    "wagtail.contrib.redirects",
-    "wagtail.contrib.modeladmin",
-    "wagtail.embeds",
-    "wagtail.sites",
-    "wagtail.users",
-    "wagtail.snippets",
-    "wagtail.documents",
-    "wagtail.images",
-    "wagtail.search",
-    "wagtail.admin",
-    "wagtail.core",
-    "myhpi.wagtail_markdown",
-    "wagtail_localize",
-    "wagtail_localize.locales",
-    "modelcluster",
-    "taggit",
+    "compressor",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
-    "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.messages",
+    "django_bootstrap_icons",
+    "modelcluster",
     "mozilla_django_oidc",
+    "taggit",
+    "wagtail.admin",
+    "wagtail.contrib.forms",
+    "wagtail.contrib.modeladmin",
+    "wagtail.contrib.redirects",
+    "wagtail.core",
+    "wagtail.documents",
+    "wagtail.embeds",
+    "wagtail.images",
+    "wagtail.search",
+    "wagtail.sites",
+    "wagtail.snippets",
+    "wagtail.users",
+    "wagtail_localize",
+    "wagtail_localize.locales",
+    "myhpi.core",
+    "myhpi.polls",
+    "myhpi.search",
+    "myhpi.wagtail_markdown",
 ]
 
 AUTHENTICATION_BACKENDS = [
@@ -162,12 +164,18 @@ USE_L10N = True
 
 USE_TZ = True
 
+# SCSS Precompiler
+# To learn more see: https://www.accordbox.com/blog/how-use-scss-sass-your-django-project-python-way/
+
+COMPRESS_PRECOMPILERS = (("text/x-scss", "django_libsass.SassCompiler"),)
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.FileSystemFinder",
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+    "compressor.finders.CompressorFinder",
 ]
 
 # ManifestStaticFilesStorage is recommended in production, to prevent outdated
