@@ -200,3 +200,35 @@ h1.toc-title::after {
     margin: 0;
     height: 0px;
 }
+
+.label-badge {
+    background-color: var(--bs-secondary);
+}
+
+@media print {
+    .toc {
+        display: none;
+    }
+
+    .minutes-container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .minutes-title {
+        order: 0
+    }
+
+    .minutes-meta {
+        order: 1;
+    }
+
+    .minutes-text {
+        order: 2;
+    }
+
+    #minutes-footer {
+        margin-top: 50px;
+        order: 3;
+    }
+}

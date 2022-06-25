@@ -24,7 +24,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     {# Global stylesheets #}
-    <link type="text/css" href="{% static "scss/myHPI.scss"|compile %}" rel="stylesheet" media="screen">
+    <link type="text/css" href="{% static "scss/myHPI.scss"|compile %}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{% static 'css/myHPI.css' %}">
 
     {% block extra_css %}
@@ -35,7 +35,7 @@
 <body class="bg-background myhpi-accent-yellow {% block body_class %}{% endblock %}">
     {% wagtailuserbar %}
 
-    <nav class="navbar-myhpi container-lg page">
+    <nav class="navbar-myhpi container-lg page d-print-none">
         <div class="navbar-top bg-white">
             {% with all_pages|all_sub_menu_pages_by_id as sub_pages_by_level_and_id %}
             <div class="page-content d-flex">
@@ -70,6 +70,7 @@
 
             {% if self.get_ancestors|length > 1 %}
             <nav aria-label="breadcrumb"
+                 class="d-print-none"
                 style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,{% filter urlencode|slice:" 43:" %}{% bs_icon 'chevron-right' size="8" %}{% endfilter %} &#34;);">
                 <ol class="breadcrumb">
                     {% for ancestor_page in self.get_ancestors %}
