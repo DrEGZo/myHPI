@@ -316,6 +316,20 @@ pytz = ">=2015.2"
 taggit = ["django-taggit (>=0.20)"]
 
 [[package]]
+name = "django-permissionedforms"
+version = "0.1"
+description = "Django extension for creating forms that vary according to user permissions"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[package.dependencies]
+Django = "*"
+
+[package.extras]
+testing = ["django-modelcluster"]
+
+[[package]]
 name = "django-static-precompiler"
 version = "2.1"
 description = "Django template tags to compile all kinds of static files (SASS, LESS, Stylus, CoffeeScript, Babel, LiveScript, Handlebars)."
@@ -1069,8 +1083,7 @@ pgsql = []
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "95da9a6328430b94fd856ba68dcc4d0e32683a5f79004b9af2e6e9e6df902a26"
-
+content-hash = "65a517c00dfa1192dc54ad1db8ee79e5baf8ba5a6e72c2a3100915448f18833e"
 
 [metadata.files]
 anyascii = [
@@ -1540,7 +1553,6 @@ pyflakes = [
 pylint = [
     {file = "pylint-2.14.3-py3-none-any.whl", hash = "sha256:6757a027e15816be23625b079ebc45464e4c9d9dde0c826d18beee53fe22a2e7"},
     {file = "pylint-2.14.3.tar.gz", hash = "sha256:4e1378f815c63e7e44590d0d339ed6435f5281d0a0cc357d29a86ea0365ef868"},
-
 ]
 pyopenssl = [
     {file = "pyOpenSSL-22.0.0-py2.py3-none-any.whl", hash = "sha256:ea252b38c87425b64116f808355e8da644ef9b07e429398bfece610f893ee2e0"},
