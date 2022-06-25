@@ -25,6 +25,7 @@ class BasePage(Page):
         PublishingPanel(),
         FieldPanel("is_public", widget=forms.CheckboxInput),
         FieldPanel("visible_for", widget=forms.CheckboxSelectMultiple),
+        FieldPanel("author_visible", widget=forms.CheckboxInput(attrs={"checked": ""})),
     ]
 
 
@@ -125,6 +126,7 @@ class MinutesForm(WagtailAdminPageForm):
 
 
 class Minutes(BasePage):
+
     group = ForeignKey(Group, on_delete=models.PROTECT, null=True)
     date = DateField()
     moderator = ForeignKey(User, on_delete=models.CASCADE, related_name="moderator")
