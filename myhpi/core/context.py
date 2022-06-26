@@ -44,7 +44,7 @@ def base_context(request):
     # If page is allowed to be viewed and (it has viewable children or is a leaf), add it to the parent's viewable children
     while depth_levels:
         deepest_level = max(depth_levels)
-        for path in path_map:
+        for path, page in path_map.items():
             page = path_map[path]
             if page.depth != deepest_level:
                 continue
@@ -52,7 +52,7 @@ def base_context(request):
             if parent_path in path_map:
                 path_map[parent_path].is_leaf = False
                 page_allowed_to_be_viewed = page in pages_visible_for_user or page.is_public
-                page_has_children_or_is_leaf = len(page.menu_children) > 0 or page.is_leaf
+                page_has_children_or_is_leaf = page.menu_children or page.is_leaf
                 if page_allowed_to_be_viewed and page_has_children_or_is_leaf:
                     path_map[parent_path].menu_children.append(page)
         depth_levels.remove(deepest_level)
