@@ -100,11 +100,9 @@ def create_information_pages(groups):
 
 
 def setup_data():
-    # settings.DEBUG = True
-    # settings.STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
+    settings.DEBUG = True
     users = create_users()
     groups = create_groups(users)
     create_basic_page_structure()
     create_information_pages(groups)
-
     return {"users": users, "groups": groups}
